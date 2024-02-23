@@ -6,9 +6,9 @@ import useStore from 'root/hooks/useStore'
 import { LoginScreenRoute } from 'root/domain/auth/screens/Login'
 import { EventSearchScreenRoute } from 'root/domain/events/screens/EventSearch'
 import { EventHomeScreenRoute } from 'root/domain/events/screens/EventHome'
+import { useFonts } from 'expo-font'
 
 export function LoadingScreen() {
-
     const setUser = useStore((state) => state.setUser)
     const setEvent = useStore((state) => state.setEvent)
 
@@ -37,7 +37,9 @@ export function LoadingScreen() {
 
     return (
         <View f={1} jc='center' ai='center'>
-            <Text fontSize={20}>LOADING...</Text>
+            <Text fontSize={"$5"}>LOADING...</Text>
         </View>
     )
 }
+
+export const LoadingScreenRoute = "domain/system/screens/Loading"

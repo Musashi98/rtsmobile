@@ -1,17 +1,22 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import User from "root/domain/auth/types/User"
+import AppUser from "root/domain/auth/types/User"
+import Event from "root/domain/events/types/Event"
 
-type GetLastSessionData = () => Promise<{ user: User | null, event: Event | null }>
 
-export const getLastSessionData: GetLastSessionData = async () => {
+type GetLastSessionDataModel = () => Promise<{ user: AppUser | null, event: Event | null }>
+type SetSessionUserModel = (user: AppUser | null) => Promise<void>
+type SetSessionEventModel = (event: Event | null) => Promise<void>
+
+
+export const getLastSessionData: GetLastSessionDataModel = async () => {
     const lastSessionUser = await AsyncStorage.getItem("user")
     const lastSessionEvent = await AsyncStorage.getItem("event")
 
-    let user: User | null = null
+    let user: AppUser | null = null
     let event: Event | null = null
 
     if (lastSessionUser) {
-        user = JSON.parse(lastSessionUser) as User
+        user = JSON.parse(lastSessionUser) as AppUser
     }
 
     if (lastSessionEvent) {
@@ -19,4 +24,12 @@ export const getLastSessionData: GetLastSessionData = async () => {
     }
 
     return { user, event }
+}
+
+export const setSessionUser: SetSessionUserModel = async (user: AppUser | null) => {
+    await AsyncStorage.setItem("user", JSON.stringify(user))
+}
+
+export const setSessionEvent: SetSessionEventModel = async (event: Event | null) => {
+    await AsyncStorage.setItem("event", JSON.stringify(event))
 }

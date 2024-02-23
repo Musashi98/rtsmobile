@@ -1,5 +1,9 @@
-type User = {
-
+type AppUser = {
+    id: string,
+    name: string,
+    email: string,
+    accessToken: string,
+    refreshToken: string
 }
 
-export default User
+export default AppUser
