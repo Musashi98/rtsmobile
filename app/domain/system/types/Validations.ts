@@ -1,0 +1,1 @@
+export type ValidationResult = { ok: true } | { ok: false, motive: string }

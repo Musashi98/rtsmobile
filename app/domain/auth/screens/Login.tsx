@@ -1,31 +1,84 @@
 import { router } from 'expo-router'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CustomTextInput from 'root/domain/system/components/inputs/CustomTextInput'
 import Link from 'root/domain/system/components/text/Link'
 import { Button, Text, View } from 'tamagui'
 import { RegisterScreenRoute } from './Register'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
-import { login } from '../services/firebaseAuthentication'
+import { login } from '../services/FirebaseAuthentication'
 import useStore from 'root/hooks/useStore'
 import useResetNavigation from 'root/hooks/useResetNavigation'
 import { EventSearchScreenRoute } from 'root/domain/events/screens/EventSearch'
+import { isValidEmail, isValidPassword } from '../utils/UserInfoValidations'
+import { useToast } from 'root/hooks/useToast'
+import { traduceFirebaseError } from 'root/domain/system/utils/FirebaseErrors'
+import CustomButton from 'root/domain/system/components/inputs/CustomButton'
+
 
 export default function LoginScreen() {
-    const execute = useExecuteWithLoading()
+    const executeWithLoading = useExecuteWithLoading()
 
     const setUser = useStore(state => state.setUser)
 
     const resetNavigation = useResetNavigation()
 
+    const showToast = useToast()
+
     const [email, setEmail] = useState("")
+    const [emailError, setEmailError] = useState("")
+    const emailModifiedRef = useRef(false)
+
     const [password, setPassword] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const passwordModifiedRef = useRef(false)
+
+    useEffect(() => {
+        if (emailModifiedRef.current) {
+            const validationResult = isValidEmail(email)
+
+            if (validationResult.ok) {
+                setEmailError("")
+            }
+            else {
+                setEmailError(validationResult.motive)
+            }
+        }
+        else {
+            emailModifiedRef.current = true
+        }
+    }, [email])
+
+    useEffect(() => {
+        if (passwordModifiedRef.current) {
+            const validationResult = isValidPassword(password)
+
+            if (validationResult.ok) {
+                setPasswordError("")
+            }
+            else {
+                setPasswordError(validationResult.motive)
+            }
+        }
+        else {
+            passwordModifiedRef.current = true
+        }
+
+    }, [password])
 
     const loginButtonPressHandler = async () => {
-        const user = await execute(async () => {
+        const loginResult = await executeWithLoading(async () => {
             return login(email, password)
         })
 
-        await setUser(user)
+        if ("error" in loginResult) {
+            showToast({
+                text: traduceFirebaseError(loginResult.error),
+                theme: "danger"
+            })
+            return
+        }
+
+        await setUser(loginResult)
 
         resetNavigation(EventSearchScreenRoute)
     }
@@ -39,17 +92,25 @@ export default function LoginScreen() {
             <CustomTextInput
                 value={email}
                 onChangeText={setEmail}
-                mb={"$5"}
+                mb={"$3"}
                 placeholder="Type your email"
+                error={emailError}
             />
             <CustomTextInput
                 value={password}
                 onChangeText={setPassword}
-                mb={"$8"}
+                mb={"$6"}
                 secureTextEntry
                 placeholder='Type your password'
+                error={passwordError}
             />
-            <Button onPress={loginButtonPressHandler} bg={"$orange6"} mb={"$5"}>LOGIN</Button>
+            <CustomButton
+                disabled={email.length === 0 || password.length === 0 || emailError !== "" || passwordError !== ""}
+                onPress={loginButtonPressHandler}
+                mb={"$3"}
+            >
+                LOGIN
+            </CustomButton>
             <View fd={"row"} gap={"$1.5"} als={"center"}>
                 <Text>You don't have an account?</Text>
                 <Link onPress={registerLinkPressHandler}>Register</Link>
