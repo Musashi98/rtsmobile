@@ -1,16 +1,15 @@
-import { User } from "firebase/auth";
-import AppUser from "../types/User";
+import { DbUser } from "../../system/types/DbUser";
+import { AppUser } from "../types/AppUser";
 
-
-export const fromFirebaseUserToAppUser = async (user: User): Promise<AppUser> => {
-
-    const accessToken = await user.getIdToken()
-
-    return {
-        id: user.uid,
-        name: user.displayName || "",
-        email: user.email || "",
-        accessToken,
-        refreshToken: user.refreshToken
+const UserConverter = {
+    appUserToDbUser: (user: AppUser): DbUser => {
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            selfies: user.selfies
+        }
     }
 }
+
+export default UserConverter

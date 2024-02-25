@@ -8,5 +8,3 @@ export default function EventHomeScreen() {
         </View>
     )
 }
-
-export const EventHomeScreenRoute = "domain/events/screens/EventHome"

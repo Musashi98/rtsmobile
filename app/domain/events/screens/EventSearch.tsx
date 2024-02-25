@@ -1,7 +1,7 @@
 import React from 'react'
-import { LoginScreenRoute } from 'root/domain/auth/screens/Login'
 import useResetNavigation from 'root/hooks/useResetNavigation'
 import useStore from 'root/hooks/useStore'
+import { LoginScreenRoute } from 'root/domain/system/routing/Routes'
 import { Button, View } from 'tamagui'
 
 export default function EventSearchScreen() {
@@ -28,5 +28,3 @@ export default function EventSearchScreen() {
         </View>
     )
 }
-
-export const EventSearchScreenRoute = "domain/events/screens/EventSearch"

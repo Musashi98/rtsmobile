@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import AppUser from "root/domain/auth/types/User"
+import AppUser from "root/domain/auth/types/AppUser"
 import Event from "root/domain/events/types/Event"
 
 

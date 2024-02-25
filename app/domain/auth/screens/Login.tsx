@@ -2,17 +2,16 @@ import { router } from 'expo-router'
 import React, { useEffect, useRef, useState } from 'react'
 import CustomTextInput from 'root/domain/system/components/inputs/CustomTextInput'
 import Link from 'root/domain/system/components/text/Link'
-import { Button, Text, View } from 'tamagui'
-import { RegisterScreenRoute } from './Register'
+import { Text, View } from 'tamagui'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
 import { login } from '../services/UserAuth'
 import useStore from 'root/hooks/useStore'
 import useResetNavigation from 'root/hooks/useResetNavigation'
-import { EventSearchScreenRoute } from 'root/domain/events/screens/EventSearch'
 import { isValidEmail, isValidPassword } from '../utils/UserInfoValidations'
 import { useToast } from 'root/hooks/useToast'
 import { traduceFirebaseError } from 'root/domain/system/utils/FirebaseErrors'
 import CustomButton from 'root/domain/system/components/inputs/CustomButton'
+import { EventSearchScreenRoute, RegisterScreenRoute } from 'root/domain/system/routing/Routes'
 
 
 export default function LoginScreen() {
@@ -118,5 +117,3 @@ export default function LoginScreen() {
         </View>
     )
 }
-
-export const LoginScreenRoute = "domain/auth/screens/Login"

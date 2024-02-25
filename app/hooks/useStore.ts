@@ -1,4 +1,4 @@
-import AppUser from "root/domain/auth/types/User";
+import { AppUser } from "root/domain/auth/types/AppUser";
 import { setSessionEvent, setSessionUser } from "root/domain/system/services/LocalStorage";
 import { create } from "zustand";
 

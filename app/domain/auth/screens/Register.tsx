@@ -2,16 +2,16 @@ import { router } from 'expo-router'
 import React, { useEffect, useRef, useState } from 'react'
 import CustomTextInput from 'root/domain/system/components/inputs/CustomTextInput'
 import Link from 'root/domain/system/components/text/Link'
-import { Button, View, Text } from 'tamagui'
+import { View, Text } from 'tamagui'
 import { register } from '../services/UserAuth'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
 import useStore from 'root/hooks/useStore'
 import useResetNavigation from 'root/hooks/useResetNavigation'
-import { EventSearchScreenRoute } from 'root/domain/events/screens/EventSearch'
 import { isValidEmail, isValidName, isValidPassword } from '../utils/UserInfoValidations'
 import { useToast } from 'root/hooks/useToast'
 import { traduceFirebaseError } from 'root/domain/system/utils/FirebaseErrors'
 import CustomButton from 'root/domain/system/components/inputs/CustomButton'
+import { EventSearchScreenRoute } from 'root/domain/system/routing/Routes'
 
 
 export default function RegisterScreen() {
@@ -142,4 +142,3 @@ export default function RegisterScreen() {
     )
 }
 
-export const RegisterScreenRoute = "domain/auth/screens/Register"

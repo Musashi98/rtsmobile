@@ -3,10 +3,7 @@ import React, { useEffect } from 'react'
 import { Text, View } from 'tamagui'
 import { getLastSessionData } from '../services/LocalStorage'
 import useStore from 'root/hooks/useStore'
-import { LoginScreenRoute } from 'root/domain/auth/screens/Login'
-import { EventSearchScreenRoute } from 'root/domain/events/screens/EventSearch'
-import { EventHomeScreenRoute } from 'root/domain/events/screens/EventHome'
-import { useFonts } from 'expo-font'
+import { EventHomeScreenRoute, EventSearchScreenRoute, LoginScreenRoute } from 'root/domain/system/routing/Routes'
 
 export function LoadingScreen() {
     const setUser = useStore((state) => state.setUser)
@@ -42,4 +39,3 @@ export function LoadingScreen() {
     )
 }
 
-export const LoadingScreenRoute = "domain/system/screens/Loading"
