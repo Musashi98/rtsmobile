@@ -8,8 +8,6 @@ type CustomButtonProps = ButtonProps & { theme?: "primary" | "danger" }
 export default function CustomButton(props: CustomButtonProps) {
     const { children, disabled, theme, ...otherProps } = props
 
-    console.log(disabled)
-
     return (
         <Button disabled={disabled} bg={disabled ? ThemeColors.disabled : ThemeColors[theme || "primary"]} {...otherProps}>
             {children}
