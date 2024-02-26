@@ -56,7 +56,7 @@ export default function EventSearchScreen() {
         else {
             await setEvent(eventSearchResult)
 
-            router.replace(EventHomeScreenRoute)
+            router.push(EventHomeScreenRoute)
         }
     }
 

@@ -16,8 +16,8 @@ export function LoadingScreen() {
     const recoverLastSession = async () => {
         const { user, event } = await getLastSessionData()
 
-        setUser(user)
-        setEvent(event)
+        await setUser(user, true)
+        await setEvent(event, true)
 
         if (!user) {
             router.replace(LoginScreenRoute)

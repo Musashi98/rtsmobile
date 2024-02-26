@@ -9,20 +9,22 @@ type State = {
 }
 
 type Actions = {
-    setUser: (user: AppUser | null) => Promise<void>,
-    setEvent: (event: AppEvent | null) => Promise<void>
+    setUser: (user: AppUser | null, avoidSave?: boolean) => Promise<void>,
+    setEvent: (event: AppEvent | null, avoidSave?: boolean) => Promise<void>
 }
 
 const useStore = create<State & Actions>((set) => ({
     user: null,
     event: null,
-    setUser: async (user) => {
-        await setSessionUser(user)
+    setUser: async (user, avoidSave) => {
+        if (!avoidSave)
+            await setSessionUser(user)
 
         set(() => ({ user }))
     },
-    setEvent: async (event) => {
-        await setSessionEvent(event)
+    setEvent: async (event, avoidSave) => {
+        if (!avoidSave)
+            await setSessionEvent(event)
 
         set(() => ({ event }))
     },
