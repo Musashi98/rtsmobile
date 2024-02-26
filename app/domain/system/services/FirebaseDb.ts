@@ -1,9 +1,10 @@
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firebaseDb } from "./FirebaseInstances";
 import { AppUser } from "root/domain/auth/types/AppUser";
 import UserConverter from "root/domain/auth/utils/UserConverter";
 import { DbUser } from "root/domain/system/types/DbUser";
 import { FirebaseError, extractFirebaseError } from "../utils/FirebaseErrors";
+import { AppEvent } from "root/domain/events/types/AppEvent";
 
 
 export const firebaseUpsertUser = async (user: AppUser): Promise<FirebaseError | void> => {
@@ -44,15 +45,7 @@ export const firebaseGetUser = async (id: string): Promise<DbUser | FirebaseErro
 
 export const firebaseUpsertEvent = async (name: string, code: string, dateNumber: number): Promise<FirebaseError | void> => {
     try {
-        const eventRef = await addDoc(collection(firebaseDb, "events"), {
-            code,
-            name,
-            dateNumber,
-            active: true
-        })
-
-        await setDoc(doc(firebaseDb, "events", eventRef.id), {
-            id: eventRef.id,
+        await setDoc(doc(firebaseDb, "events", code), {
             code,
             name,
             dateNumber,
@@ -60,7 +53,32 @@ export const firebaseUpsertEvent = async (name: string, code: string, dateNumber
         })
     }
     catch (e: any) {
-        console.log(e)
+        return extractFirebaseError(e.message)
+    }
+}
+
+export const firebaseGetEvent = async (code: string): Promise<AppEvent | FirebaseError> => {
+    try {
+        const eventResult = await getDoc(doc(firebaseDb, "events", code))
+
+        if (eventResult.exists()) {
+            const event: AppEvent = {
+                code: eventResult.data().code,
+                name: eventResult.data().name,
+                dateNumber: eventResult.data().dateNumber,
+                picture: eventResult.data().picture,
+                active: eventResult.data().active
+            }
+
+            return event
+        }
+        else {
+            const error: FirebaseError = { module: "firestore", error: "No event exists with that code" }
+
+            return error
+        }
+    }
+    catch (e: any) {
         return extractFirebaseError(e.message)
     }
 }

@@ -1,4 +1,4 @@
-import { EventPicture } from "root/domain/events/types/EventPicture"
+import { EventPicture } from "root/domain/auth/types/UserSelfie"
 
 
 export type DbUser = {
