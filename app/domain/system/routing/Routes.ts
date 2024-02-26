@@ -1,5 +1,6 @@
 export const LoginScreenRoute = "domain/auth/screens/Login"
 export const RegisterScreenRoute = "domain/auth/screens/Register"
 export const EventHomeScreenRoute = "domain/events/screens/EventHome"
+export const EventCreationScreenRoute = "domain/events/screens/EventCreation"
 export const EventSearchScreenRoute = "domain/events/screens/EventSearch"
 export const LoadingScreenRoute = "domain/system/screens/Loading"

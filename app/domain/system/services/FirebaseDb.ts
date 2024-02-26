@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { firebaseDb } from "./FirebaseInstances";
 import { AppUser } from "root/domain/auth/types/AppUser";
 import UserConverter from "root/domain/auth/utils/UserConverter";
@@ -38,6 +38,29 @@ export const firebaseGetUser = async (id: string): Promise<DbUser | FirebaseErro
         }
     }
     catch (e: any) {
+        return extractFirebaseError(e.message)
+    }
+}
+
+export const firebaseUpsertEvent = async (name: string, code: string, dateNumber: number): Promise<FirebaseError | void> => {
+    try {
+        const eventRef = await addDoc(collection(firebaseDb, "events"), {
+            code,
+            name,
+            dateNumber,
+            active: true
+        })
+
+        await setDoc(doc(firebaseDb, "events", eventRef.id), {
+            id: eventRef.id,
+            code,
+            name,
+            dateNumber,
+            active: true
+        })
+    }
+    catch (e: any) {
+        console.log(e)
         return extractFirebaseError(e.message)
     }
 }

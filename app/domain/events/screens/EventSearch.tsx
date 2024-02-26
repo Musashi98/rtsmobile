@@ -1,8 +1,10 @@
 import React from 'react'
 import useResetNavigation from 'root/hooks/useResetNavigation'
 import useStore from 'root/hooks/useStore'
-import { LoginScreenRoute } from 'root/domain/system/routing/Routes'
+import { EventCreationScreenRoute, LoginScreenRoute } from 'root/domain/system/routing/Routes'
 import { Button, View } from 'tamagui'
+import CustomButton from 'root/domain/system/components/inputs/CustomButton'
+import { router } from 'expo-router'
 
 export default function EventSearchScreen() {
     const setUser = useStore(state => state.setUser)
@@ -15,16 +17,26 @@ export default function EventSearchScreen() {
         resetNavigation(LoginScreenRoute)
     }
 
+    const temporaryCreateEventButtonPressHandler = () => {
+        router.navigate(EventCreationScreenRoute)
+    }
+
     return (
-        <View f={1} jc={"center"}>
-            <Button
+        <View f={1} jc={"center"} gap={"$3"}>
+            <CustomButton
                 onPress={temporaryLogoutButtonPressHandler}
                 w={"$20"}
                 als={"center"}
-                bg={"$orange6"}
             >
                 Logout
-            </Button>
+            </CustomButton>
+            <CustomButton
+                w={"$20"}
+                als={"center"}
+                onPress={temporaryCreateEventButtonPressHandler}
+            >
+                Create event
+            </CustomButton>
         </View>
     )
 }

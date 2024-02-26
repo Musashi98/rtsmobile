@@ -15,7 +15,7 @@ import { EventSearchScreenRoute } from 'root/domain/system/routing/Routes'
 
 
 export default function RegisterScreen() {
-    const execute = useExecuteWithLoading()
+    const executeWithLoading = useExecuteWithLoading()
 
     const setUser = useStore(state => state.setUser)
 
@@ -85,7 +85,7 @@ export default function RegisterScreen() {
     }, [password])
 
     const registerButtonPressHandler = async () => {
-        const registerResult = await execute(async () => {
+        const registerResult = await executeWithLoading(async () => {
             return register(name, email, password)
         })
 
