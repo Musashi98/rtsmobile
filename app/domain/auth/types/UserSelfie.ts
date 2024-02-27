@@ -1,1 +1,5 @@
-export type UserSelfie = [string, string]
+export type UserSelfie = {
+    event: string,
+    picture: string,
+    description: string
+}

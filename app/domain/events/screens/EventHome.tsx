@@ -6,7 +6,7 @@ import { Text, View } from 'tamagui'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import CustomButton from 'root/domain/system/components/inputs/CustomButton'
 import { router } from 'expo-router'
-import { EventSelfiesScreenRoute } from 'root/domain/system/routing/Routes'
+import { SelfieCameraScreenRoute, EventSelfiesScreenRoute } from 'root/domain/system/routing/Routes'
 import BackButton from 'root/domain/system/components/others/BackButton'
 
 
@@ -20,10 +20,15 @@ export default function EventHomeScreen() {
         router.push(EventSelfiesScreenRoute)
     }
 
+    const takeASelfieButtonPressHandler = () => {
+        router.navigate(SelfieCameraScreenRoute)
+    }
+
     return (
         <BackgroundView image={event.picture}>
             <View f={1} pt={insets.top} pb={insets.bottom + 10} px={"$4"} justifyContent="space-between">
                 <BackButton />
+                <CustomButton onPress={takeASelfieButtonPressHandler}>Take a selfie</CustomButton>
                 <View fd={"row"} jc={"space-between"} ai={"center"}>
                     <View>
                         <Text color={"white"} fontSize={"$8"} fontWeight={"bold"}>{event.name}</Text>
