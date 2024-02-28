@@ -7,8 +7,8 @@ import { FirebaseError, extractFirebaseError } from "../utils/FirebaseErrors";
 import { AppEvent } from "root/domain/events/types/AppEvent";
 
 
-export const firebaseUpsertUser = async (user: AppUser): Promise<FirebaseError | void> => {
-    const dbUser: DbUser = UserConverter.appUserToDbUser(user)
+export const firebaseUpsertUser = async (user: AppUser | DbUser): Promise<FirebaseError | void> => {
+    const dbUser: DbUser = ("accessToken" in user) ? UserConverter.appUserToDbUser(user) : user
 
     try {
         await setDoc(doc(firebaseDb, "users", user.id), dbUser)

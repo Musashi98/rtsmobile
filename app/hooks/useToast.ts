@@ -1,7 +1,7 @@
 import Toast, { ToastOptions } from "react-native-root-toast"
 import ThemeColors from "root/domain/system/utils/ThemeColors"
 
-type ToastTheme = "primary" | "danger"
+type ToastTheme = "primary" | "danger" | "success"
 
 export const useToast = () => {
     const showToast = (params: { text: string, theme?: ToastTheme } & ToastOptions) => {

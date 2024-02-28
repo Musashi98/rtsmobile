@@ -1,4 +1,5 @@
 import { AppUser } from "root/domain/auth/types/AppUser";
+import { UserSelfie } from "root/domain/auth/types/UserSelfie";
 import { AppEvent } from "root/domain/events/types/AppEvent";
 import { setSessionEvent, setSessionUser } from "root/domain/system/services/LocalStorage";
 import { SelfieParams } from "root/domain/system/types/SelfieParams";
@@ -13,7 +14,8 @@ type State = {
 type Actions = {
     setUser: (user: AppUser | null, avoidSave?: boolean) => Promise<void>,
     setEvent: (event: AppEvent | null, avoidSave?: boolean) => Promise<void>,
-    setSelfieParams: (params: SelfieParams) => void
+    setSelfieParams: (params: SelfieParams) => void,
+    pushSelfie: (selfie: UserSelfie, avoidSave?: boolean) => void
 }
 
 const useStore = create<State & Actions>((set) => ({
@@ -34,6 +36,19 @@ const useStore = create<State & Actions>((set) => ({
     },
     setSelfieParams: (params) => {
         set(() => ({ selfieParams: params }))
+    },
+    pushSelfie: (selfie: UserSelfie, avoidSave?: boolean) => {
+        set(state => {
+            const newUser = { ...(state.user as AppUser) }
+
+            newUser.selfies.push(selfie)
+
+            if (!avoidSave) {
+                setSessionUser(newUser)
+            }
+
+            return ({ user: newUser })
+        })
     }
 }))
 

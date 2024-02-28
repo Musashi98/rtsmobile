@@ -1,6 +1,7 @@
 export default {
     primary: "rgb(250, 147, 78)",
     danger: "rgb(229, 72, 77)",
+    success: "rgb(10, 220, 10)",
     disabled: "rgb(200, 200, 200)"
 }
 

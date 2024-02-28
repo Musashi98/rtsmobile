@@ -1,2 +1,2 @@
-export const selfieContainerMinimumWidth = 180
+export const selfieContainerMinimumWidth = 100
 export const minimumGapBetweenSelfies = 10
