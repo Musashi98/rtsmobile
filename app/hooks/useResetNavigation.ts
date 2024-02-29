@@ -7,7 +7,7 @@ const useResetNavigation = () => {
             router.back()
         }
 
-        router.push(initialRoute)
+        router.replace(initialRoute)
     }
 
     return resetNavigation

@@ -4,4 +4,6 @@ export type AppEvent = {
     dateNumber: number;
     active: boolean;
     picture: string;
+    description: string;
+    location: string;
 }

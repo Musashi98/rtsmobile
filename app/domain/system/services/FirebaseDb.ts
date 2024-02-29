@@ -67,7 +67,9 @@ export const firebaseGetEvent = async (code: string): Promise<AppEvent | Firebas
                 name: eventResult.data().name,
                 dateNumber: eventResult.data().dateNumber,
                 picture: eventResult.data().picture,
-                active: eventResult.data().active
+                active: eventResult.data().active,
+                location: eventResult.data().location,
+                description: eventResult.data().description
             }
 
             return event

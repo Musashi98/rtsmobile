@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, TextProps } from 'tamagui'
-import ThemeColors from '../../utils/ThemeColors'
+import { ThemeColors } from '../../utils/ThemeColors'
 
 
 type LinkProps = TextProps
@@ -10,7 +10,7 @@ export default function Link(props: LinkProps) {
     const { children, ...otherProps } = props
 
     return (
-        <Text col={ThemeColors.primary} textDecorationLine={"underline"} {...otherProps}>
+        <Text col={ThemeColors.light.primary} textDecorationLine={"underline"} {...otherProps}>
             {children}
         </Text>
     )

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Dimensions, Image, TouchableOpacity, ViewStyle } from 'react-native'
 import { View } from 'tamagui'
-import ThemeColors from '../utils/ThemeColors'
 import { Camera, CameraCapturedPicture, CameraType } from 'expo-camera'
 import { router } from 'expo-router'
 import { EventHomeScreenRoute } from '../routing/Routes'
@@ -13,6 +12,7 @@ import { uploadUserSelfie } from '../services/FirebaseStorage'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
 import { AppEvent } from 'root/domain/events/types/AppEvent'
 import { useToast } from 'root/hooks/useToast'
+import { ThemeColors } from '../utils/ThemeColors'
 
 
 const { width: windowWidth } = Dimensions.get("window")
@@ -118,7 +118,7 @@ export default function SelfieCamera() {
                 }
                 {
                     imageUri && <TouchableOpacity style={{ padding: 6 }} onPress={acceptImageButtonPressHandler}>
-                        <AntDesign name="check" size={24} color={ThemeColors.success} />
+                        <AntDesign name="check" size={24} color={ThemeColors.light.success} />
                     </TouchableOpacity>
                 }
             </View>
@@ -136,5 +136,5 @@ const takePictureButtonStyle: ViewStyle = {
     width: 60,
     height: 60,
     borderRadius: 1000000,
-    backgroundColor: ThemeColors.primary,
+    backgroundColor: ThemeColors.dark.primary,
 }

@@ -2,10 +2,9 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { UserSelfie } from 'root/domain/auth/types/UserSelfie'
 import { SelfieParams } from 'root/domain/system/types/SelfieParams'
-import ThemeColors from 'root/domain/system/utils/ThemeColors'
 import { useSelfieViewer } from 'root/hooks/useSelfieViewer'
 import useStore from 'root/hooks/useStore'
-import { View, Text, Image } from 'tamagui'
+import { View, Image } from 'tamagui'
 
 
 type SelfieContainerProps = {
@@ -34,9 +33,6 @@ export default function SelfieContainer(props: SelfieContainerProps) {
                 <View f={1}>
                     <Image src={picture} width={containerWidth} height={containerWidth * 4 / 3} />
                 </View>
-                {/* <View h={"30%"} p={"$2"} bg={ThemeColors.primary} ai={"center"} jc={"center"}>
-                <Text ta={"center"}>{description}</Text>
-            </View> */}
             </View>
         </TouchableOpacity>
     )

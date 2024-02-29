@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { Modal } from "react-native";
+import { ThemeColors } from "root/domain/system/utils/ThemeColors";
 import { Spinner, View, ViewProps } from "tamagui";
 
 
@@ -23,7 +24,7 @@ const Provider = (props: ProviderProps) => {
             {
                 loading && <Modal visible={true} transparent>
                     <View f={1} jc={"center"} bg={"rgba(100, 100, 100, 0.5)"}>
-                        <Spinner size={"large"} color={"$orange6"} />
+                        <Spinner size={"large"} color={ThemeColors.dark.primary} />
                     </View>
                 </Modal>
             }

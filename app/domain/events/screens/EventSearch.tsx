@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import useResetNavigation from 'root/hooks/useResetNavigation'
 import useStore from 'root/hooks/useStore'
 import { EventHomeScreenRoute, LoginScreenRoute } from 'root/domain/system/routing/Routes'
-import { Text, View } from 'tamagui'
+import { ScrollView, Text, View } from 'tamagui'
 import CustomButton from 'root/domain/system/components/inputs/CustomButton'
 import { router } from 'expo-router'
 import CustomTextInput from 'root/domain/system/components/inputs/CustomTextInput'
@@ -10,6 +10,11 @@ import { isValidEventCode } from '../utils/EventInfoValidations'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
 import { useToast } from 'root/hooks/useToast'
 import { firebaseGetEvent } from 'root/domain/system/services/FirebaseDb'
+import { Dimensions } from 'react-native'
+import BackgroundView from 'root/domain/system/components/others/BackgroundView'
+
+
+const { height: windowHeight } = Dimensions.get("window")
 
 export default function EventSearchScreen() {
     const setUser = useStore(state => state.setUser)
@@ -56,39 +61,51 @@ export default function EventSearchScreen() {
         else {
             await setEvent(eventSearchResult)
 
-            router.push(EventHomeScreenRoute)
+            router.replace(EventHomeScreenRoute)
         }
     }
 
-    const temporaryLogoutButtonPressHandler = async () => {
+    const logoutButtonPressHandler = async () => {
         await setUser(null)
 
         resetNavigation(LoginScreenRoute)
     }
 
     return (
-        <View f={1} jc={"center"} px={"$8"}>
-            <Text>Select an event code:</Text>
-            <CustomTextInput
-                value={code}
-                onChangeText={setCode}
-                placeholder='Type event code'
-                mb={"$4"}
-                error={codeError}
-                maxLength={6}
-            />
-            <CustomButton
-                disabled={code === "" || codeError !== ""}
-                mb={"$10"}
-                onPress={searchEventButtonPressHandler}
-            >
-                Search event
-            </CustomButton>
-            <CustomButton
-                onPress={temporaryLogoutButtonPressHandler}
-            >
-                Logout
-            </CustomButton>
+        <View f={1} position='relative'>
+            <BackgroundView imgAspectRatio={1} image={require("root/assets/images/running-background.jpg")}>
+                <ScrollView>
+                    <View mih={windowHeight} jc={"center"} px={"$8"}>
+                        <CustomTextInput
+                            id='EventCode'
+                            label='Event code'
+                            mode='dark'
+                            value={code}
+                            onChangeText={setCode}
+                            placeholder='Type event code'
+                            mb={"$4"}
+                            letterSpacing={2}
+                            error={codeError}
+                            maxLength={6}
+                        />
+                        <CustomButton
+                            mode='dark'
+                            disabled={code === "" || codeError !== ""}
+                            onPress={searchEventButtonPressHandler}
+                        >
+                            Search event
+                        </CustomButton>
+                        <View pos={"absolute"} b={"$8"} als={"center"} w={"100%"}>
+                            <CustomButton
+                                mode="dark"
+                                onPress={logoutButtonPressHandler}
+                            >
+                                Logout
+                            </CustomButton>
+                        </View>
+                    </View>
+                </ScrollView>
+            </BackgroundView>
         </View>
     )
 }

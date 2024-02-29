@@ -1,15 +1,15 @@
 import React from 'react'
 import { Button, ButtonProps } from 'tamagui'
-import ThemeColors from '../../utils/ThemeColors'
+import { ModeType, ThemeColors, ThemeType } from '../../utils/ThemeColors'
 
 
-type CustomButtonProps = ButtonProps & { theme?: "primary" | "danger" }
+type CustomButtonProps = ButtonProps & { theme?: ThemeType, mode?: ModeType }
 
 export default function CustomButton(props: CustomButtonProps) {
-    const { children, disabled, theme, ...otherProps } = props
+    const { children, disabled, theme, mode, ...otherProps } = props
 
     return (
-        <Button disabled={disabled} bg={disabled ? ThemeColors.disabled : ThemeColors[theme || "primary"]} {...otherProps}>
+        <Button disabled={disabled} bg={disabled ? ThemeColors[mode || "light"].disabled : ThemeColors[mode || "light"][theme || "primary"]} {...otherProps}>
             {children}
         </Button>
     )
