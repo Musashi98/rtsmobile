@@ -8,9 +8,10 @@ import CustomButton from 'root/domain/system/components/inputs/CustomButton'
 import { router } from 'expo-router'
 import { SelfieCameraScreenRoute, EventSelfiesScreenRoute, EventSearchScreenRoute } from 'root/domain/system/routing/Routes'
 import BackButton from 'root/domain/system/components/others/BackButton'
-import { Entypo, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Entypo, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { ThemeColors } from 'root/domain/system/utils/ThemeColors'
 import { useSelfieViewer } from 'root/hooks/useSelfieViewer'
+import { TouchableOpacity } from 'react-native'
 
 
 export default function EventHomeScreen() {
@@ -48,9 +49,9 @@ export default function EventHomeScreen() {
                         <Text color={"white"} fontSize={"$8"} fontWeight={"bold"}>{event.name}</Text>
                         <Text color={"white"}>{(new Date(event.dateNumber)).toDateString()}</Text>
                     </View>
-                    <CustomButton mode='dark' px={"$3"} onPress={watchEventPictureButtonHandler} als={"center"}>
-                        <MaterialCommunityIcons name="image-search" size={24} color="black" />
-                    </CustomButton>
+                    <TouchableOpacity style={{ padding: 6 }} onPress={watchEventPictureButtonHandler}>
+                        <MaterialIcons name="image-search" size={26} color="white" />
+                    </TouchableOpacity>
                 </View>
                 <View f={1} ov={"hidden"}>
                     <ScrollView>
@@ -67,8 +68,8 @@ export default function EventHomeScreen() {
                     </ScrollView>
                 </View>
                 <View mt={"$3"} fd={"row"} jc={"space-around"}>
-                    <CustomButton mode='dark' als={"center"} onPress={takeASelfieButtonPressHandler}>Take a selfie<Entypo name="camera" size={20} color="black" /></CustomButton>
-                    <CustomButton mode='dark' als={"center"} onPress={mySelfiesButtonPressHandler}>Watch selfies<MaterialCommunityIcons name="image-multiple" size={24} color="black" /></CustomButton>
+                    <CustomButton mode='dark' bTheme="secondary" als={"center"} onPress={takeASelfieButtonPressHandler}>Take a selfie<Entypo name="camera" size={20} color="black" /></CustomButton>
+                    <CustomButton mode='dark' bTheme="secondary" als={"center"} onPress={mySelfiesButtonPressHandler}>Watch selfies<MaterialCommunityIcons name="image-multiple" size={24} color="black" /></CustomButton>
                 </View>
             </View>
         </BackgroundView>

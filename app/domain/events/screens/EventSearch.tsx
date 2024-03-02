@@ -12,6 +12,7 @@ import { useToast } from 'root/hooks/useToast'
 import { firebaseGetEvent } from 'root/domain/system/services/FirebaseDb'
 import { Dimensions } from 'react-native'
 import BackgroundView from 'root/domain/system/components/others/BackgroundView'
+import { AntDesign, Feather, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 
 
 const { height: windowHeight } = Dimensions.get("window")
@@ -93,14 +94,21 @@ export default function EventSearchScreen() {
                             disabled={code === "" || codeError !== ""}
                             onPress={searchEventButtonPressHandler}
                         >
-                            Search event
+                            <View fd={'row'} ai={"center"} gap={4}>
+                                <Text>Search event</Text>
+                                <AntDesign name="search1" size={20} color="black" />
+                            </View>
                         </CustomButton>
                         <View pos={"absolute"} b={"$8"} als={"center"} w={"100%"}>
                             <CustomButton
                                 mode="dark"
+                                bTheme={"secondary"}
                                 onPress={logoutButtonPressHandler}
                             >
-                                Logout
+                                <View fd={"row"} ai={"center"} gap={4}>
+                                    <Text>Logout</Text>
+                                    <SimpleLineIcons name="logout" size={18} color="black" />
+                                </View>
                             </CustomButton>
                         </View>
                     </View>

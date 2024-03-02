@@ -76,8 +76,7 @@ export default function LoginScreen() {
         if ("error" in loginResult) {
             showToast({
                 text: traduceFirebaseError(loginResult.error),
-                theme: "danger",
-                mode: 'dark'
+                theme: "danger"
             })
             return
         }

@@ -30,6 +30,9 @@ export const uploadUserSelfie = async (userId: string, eventCode: string, file: 
         return { event: eventCode, picture: resourceUrl, description: "" }
     }
     catch (e: any) {
-        return extractFirebaseError(e.message)
+        if (e.message.contains("("))
+            return extractFirebaseError(e.message)
+
+        return e.message
     }
 }

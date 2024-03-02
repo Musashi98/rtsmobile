@@ -1,15 +1,17 @@
-export type ThemeType = "primary" | "danger" | "success" | "disabled"
+export type ThemeType = "primary" | "secondary" | "danger" | "success" | "disabled"
 export type ModeType = "light" | "dark"
 
 export const ThemeColors = {
     light: {
         primary: "rgb(250, 147, 78)",
+        secondary: "rgb(78, 207, 250)",
         danger: "rgb(229, 72, 77)",
         success: "rgb(80, 250, 80)",
         disabled: "rgb(200, 200, 200)"
     },
     dark: {
         primary: "rgb(252, 183, 137)",
+        secondary: "rgb(137, 223, 252)",
         danger: "rgb(250, 150, 160)",
         success: "rgb(80, 250, 80)",
         disabled: "rgb(200, 200, 200)"

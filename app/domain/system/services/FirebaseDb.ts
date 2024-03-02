@@ -14,7 +14,10 @@ export const firebaseUpsertUser = async (user: AppUser | DbUser): Promise<Fireba
         await setDoc(doc(firebaseDb, "users", user.id), dbUser)
     }
     catch (e: any) {
-        return extractFirebaseError(e.message)
+        if (e.message.contains("("))
+            return extractFirebaseError(e.message)
+
+        return e.message
     }
 }
 
@@ -39,7 +42,10 @@ export const firebaseGetUser = async (id: string): Promise<DbUser | FirebaseErro
         }
     }
     catch (e: any) {
-        return extractFirebaseError(e.message)
+        if (e.message.contains("("))
+            return extractFirebaseError(e.message)
+
+        return e.message
     }
 }
 
@@ -53,7 +59,10 @@ export const firebaseUpsertEvent = async (name: string, code: string, dateNumber
         })
     }
     catch (e: any) {
-        return extractFirebaseError(e.message)
+        if (e.message.contains("("))
+            return extractFirebaseError(e.message)
+
+        return e.message
     }
 }
 
@@ -81,6 +90,9 @@ export const firebaseGetEvent = async (code: string): Promise<AppEvent | Firebas
         }
     }
     catch (e: any) {
-        return extractFirebaseError(e.message)
+        if (e.message.contains("("))
+            return extractFirebaseError(e.message)
+
+        return e.message
     }
 }
