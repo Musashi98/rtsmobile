@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import BackgroundView from 'root/domain/system/components/others/BackgroundView'
 import useStore from 'root/hooks/useStore'
 import { View, Text } from 'tamagui'
@@ -6,7 +6,7 @@ import { AppEvent } from '../types/AppEvent'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import BackButton from 'root/domain/system/components/others/BackButton'
 import SelfieContainer from '../components/containers/SelfieContainer'
-import { FlatList, TouchableOpacity } from 'react-native'
+import { BackHandler, FlatList, TouchableOpacity } from 'react-native'
 import { UserSelfie } from 'root/domain/auth/types/UserSelfie'
 import { SelfieParams } from 'root/domain/system/types/SelfieParams'
 import { minimumGapBetweenSelfies } from 'root/domain/system/configurations/AppConfigParams'
@@ -47,11 +47,33 @@ export default function EventSelfies() {
 
     const [selectingItems, setSelectingItems] = useState(false)
 
+    const selectingItemsRef = useRef(selectingItems)
+    selectingItemsRef.current = selectingItems
+
     const [itemsSelected, setItemsSelected] = useState<boolean[]>((new Array(selfies.length)).fill(false))
 
     const [inspectingImages, setInspectingImages] = useState(false)
 
     const inspectedImageIndex = useRef(0)
+
+    useEffect(() => {
+        const deviceBackButtonPressHandler = () => {
+            if (selectingItemsRef.current) {
+                leaveSelectingState()
+
+                return true
+            }
+            else {
+                return false
+            }
+        }
+
+        BackHandler.addEventListener("hardwareBackPress", deviceBackButtonPressHandler)
+
+        return () => {
+            BackHandler.removeEventListener("hardwareBackPress", deviceBackButtonPressHandler)
+        }
+    }, [])
 
     const inspectImage = (index: number) => {
         inspectedImageIndex.current = index

@@ -13,6 +13,7 @@ import { firebaseGetEvent } from 'root/domain/system/services/FirebaseDb'
 import { Dimensions } from 'react-native'
 import BackgroundView from 'root/domain/system/components/others/BackgroundView'
 import { AntDesign, Feather, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
+import useConfirmationDialog from 'root/hooks/useConfirmationDialog'
 
 
 const { height: windowHeight } = Dimensions.get("window")
@@ -25,6 +26,8 @@ export default function EventSearchScreen() {
     const executeWithLoading = useExecuteWithLoading()
 
     const showToast = useToast()
+
+    const showConfirmationDialog = useConfirmationDialog()
 
     const [code, setCode] = useState("")
     const [codeError, setCodeError] = useState("")
@@ -66,10 +69,17 @@ export default function EventSearchScreen() {
         }
     }
 
-    const logoutButtonPressHandler = async () => {
+    const logoutUser = async () => {
         await setUser(null)
 
         resetNavigation(LoginScreenRoute)
+    }
+
+    const logoutButtonPressHandler = async () => {
+        showConfirmationDialog({
+            text: "Are you sure you want to logout from your account?",
+            onPositive: logoutUser
+        })
     }
 
     return (

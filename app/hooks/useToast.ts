@@ -13,7 +13,8 @@ export const useToast = () => {
             opacity: 1,
             containerStyle: {
                 borderRadius: 20,
-                padding: 30
+                paddingHorizontal: 30,
+                paddingVertical: 20
             },
             animation: true,
             ...otherOptions

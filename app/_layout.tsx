@@ -6,16 +6,19 @@ import { TamaguiProvider } from 'tamagui'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootSiblingParent } from 'react-native-root-siblings'
 import ConfirmationDialogModalContext from './context/ConfirmationDialogModalContext';
+import InformationDialogModalContext from './context/InformationDialogModalContext';
 
 export default function Layout(props: any) {
   return <TamaguiProvider config={tamaguiConfig}>
     <LoadingModalContext.Provider>
       <ConfirmationDialogModalContext.Provider>
-        <SafeAreaProvider>
-          <RootSiblingParent>
-            <Stack screenOptions={{ headerShown: false }} />
-          </RootSiblingParent>
-        </SafeAreaProvider>
+        <InformationDialogModalContext.Provider>
+          <SafeAreaProvider>
+            <RootSiblingParent>
+              <Stack screenOptions={{ headerShown: false }} />
+            </RootSiblingParent>
+          </SafeAreaProvider>
+        </InformationDialogModalContext.Provider>
       </ConfirmationDialogModalContext.Provider>
     </LoadingModalContext.Provider>
   </TamaguiProvider>

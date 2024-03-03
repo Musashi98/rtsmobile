@@ -37,6 +37,7 @@ export default function CustomButton(props: CustomButtonProps) {
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
                 w="auto"
+                miw={60}
                 h={"$4"}
                 br={6}
                 py="$3"

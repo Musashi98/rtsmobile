@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Alert, Dimensions, Image, TouchableOpacity, ViewStyle } from 'react-native'
+import { BackHandler, Dimensions, Image, TouchableOpacity, ViewStyle } from 'react-native'
 import { View } from 'tamagui'
 import { Camera, CameraCapturedPicture, CameraType } from 'expo-camera'
 import { router } from 'expo-router'
-import { EventHomeScreenRoute } from '../routing/Routes'
 import { FlipType, ImageResult, manipulateAsync } from 'expo-image-manipulator'
 import { AntDesign } from '@expo/vector-icons'
 import useStore from 'root/hooks/useStore'
@@ -13,6 +12,7 @@ import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
 import { AppEvent } from 'root/domain/events/types/AppEvent'
 import { useToast } from 'root/hooks/useToast'
 import { ThemeColors } from '../utils/ThemeColors'
+import useInformationDialog from 'root/hooks/useInformationDialog'
 
 
 const { width: windowWidth } = Dimensions.get("window")
@@ -25,13 +25,37 @@ export default function SelfieCamera() {
 
     const showToast = useToast()
 
+    const showInformationDialog = useInformationDialog()
+
     const executeWithLoading = useExecuteWithLoading()
 
     const [cameraPermission, requestCameraPermission] = Camera.useCameraPermissions()
 
     const [imageUri, setImageUri] = useState<string | null>(null)
 
+    const imageUriRef = useRef(imageUri)
+    imageUriRef.current = imageUri
+
     const cameraRef = useRef<Camera>(null)
+
+    useEffect(() => {
+        const deviceBackButtonPressHandler = () => {
+            if (imageUriRef.current) {
+                setImageUri(null)
+
+                return true
+            }
+            else {
+                return false
+            }
+        }
+
+        BackHandler.addEventListener("hardwareBackPress", deviceBackButtonPressHandler)
+
+        return () => {
+            BackHandler.removeEventListener("hardwareBackPress", deviceBackButtonPressHandler)
+        }
+    }, [])
 
     useEffect(() => {
         if (!cameraPermission || !cameraPermission.granted) {
@@ -40,16 +64,16 @@ export default function SelfieCamera() {
     }, [cameraPermission])
 
     const makeCameraPermissionRequest = async () => {
-        let result = await requestCameraPermission()
+        let result = cameraPermission
 
-        while (!result.granted && result.canAskAgain) {
+        while (!result || (!result.granted && result.canAskAgain)) {
             await requestCameraPermission()
         }
 
         if (!result.canAskAgain) {
-            Alert.alert("Error", "You didn't give this app camera permissions and could not show the request popup anymore. You can turn camera permissions on by going to this device settings.")
+            showInformationDialog("You didn't give this app camera permissions and could not show the request popup anymore. You can turn camera permissions on by going to this device settings.")
 
-            router.navigate(EventHomeScreenRoute)
+            router.back()
         }
     }
 
@@ -97,7 +121,10 @@ export default function SelfieCamera() {
         <View f={1} bg={"black"}>
             <View f={1} />
             {
-                !imageUri && <Camera ref={cameraRef} type={CameraType.front} style={{ width: windowWidth, height: windowWidth * 4 / 3 }} />
+                (!cameraPermission || !cameraPermission.granted) && <View w={windowWidth} height={windowWidth * 4 / 3} bg={"black"} />
+            }
+            {
+                !imageUri && cameraPermission && cameraPermission.granted && <Camera ref={cameraRef} type={CameraType.front} style={{ width: windowWidth, height: windowWidth * 4 / 3 }} />
             }
             {
                 imageUri && <Image source={{ uri: imageUri }} style={{ width: windowWidth, height: windowWidth * 4 / 3 }} />
