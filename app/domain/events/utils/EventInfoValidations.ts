@@ -9,10 +9,10 @@ export const isValidEventCode = (code: string): ValidationResult => {
             motive: "Only uppercase letters and numbers allowed"
         }
 
-    if (code.length !== 6)
+    if (code.length !== 8)
         return {
             ok: false,
-            motive: "Codes have 6 characters"
+            motive: "Code must have 8 characters"
         }
 
     return {

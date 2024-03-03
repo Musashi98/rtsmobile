@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootSiblingParent } from 'react-native-root-siblings'
 import ConfirmationDialogModalContext from './context/ConfirmationDialogModalContext';
 import InformationDialogModalContext from './context/InformationDialogModalContext';
+import { StatusBar } from 'expo-status-bar';
 
 export default function Layout(props: any) {
   return <TamaguiProvider config={tamaguiConfig}>

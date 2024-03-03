@@ -7,6 +7,7 @@ import { EventHomeScreenRoute, EventSearchScreenRoute, LoginScreenRoute } from '
 import { calculateSelfieColumnCountAndWidth } from '../utils/Calculations'
 import { minimumGapBetweenSelfies, selfieContainerMinimumWidth } from '../configurations/AppConfigParams'
 import { Dimensions } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
 
 
 const { width: windowWidth } = Dimensions.get("window")
@@ -52,6 +53,7 @@ export function LoadingScreen() {
 
     return (
         <View f={1} jc='center' ai='center'>
+            <StatusBar translucent style="dark" />
             <Text fontSize={"$5"}>LOADING...</Text>
         </View>
     )

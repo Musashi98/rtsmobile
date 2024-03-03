@@ -13,6 +13,7 @@ import { AppEvent } from 'root/domain/events/types/AppEvent'
 import { useToast } from 'root/hooks/useToast'
 import { ThemeColors } from '../utils/ThemeColors'
 import useInformationDialog from 'root/hooks/useInformationDialog'
+import { StatusBar } from 'expo-status-bar'
 
 
 const { width: windowWidth } = Dimensions.get("window")
@@ -119,6 +120,7 @@ export default function SelfieCamera() {
 
     return (
         <View f={1} bg={"black"}>
+            <StatusBar translucent style="light" />
             <View f={1} />
             {
                 (!cameraPermission || !cameraPermission.granted) && <View w={windowWidth} height={windowWidth * 4 / 3} bg={"black"} />

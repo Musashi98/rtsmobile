@@ -12,6 +12,7 @@ import { Entypo, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icon
 import { ThemeColors } from 'root/domain/system/utils/ThemeColors'
 import { TouchableOpacity } from 'react-native'
 import ImagesViewerModal from 'root/domain/system/components/others/ImagesViewerModal'
+import { StatusBar } from 'expo-status-bar'
 
 
 export default function EventHomeScreen() {
@@ -46,6 +47,7 @@ export default function EventHomeScreen() {
 
     return (
         <BackgroundView image={event.picture}>
+            <StatusBar translucent style="light" />
             <View f={1} pt={insets.top} pb={insets.bottom + 10} justifyContent="space-between">
                 <View px={"$4"} mb="$3" fd={"row"} jc={"space-between"} ai={"center"}>
                     <BackButton onPress={backButtonPressHandler} />

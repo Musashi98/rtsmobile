@@ -9,9 +9,9 @@ export const calculateSelfieColumnCountAndWidth = (
 
     const totalSpaceBetween = windowWidth % minimumSelfieWidth;
 
-    const columnCount = totalSpaceBetween < minimumGapBetweenSelfies * (temporalColumnCount - 1) ? temporalColumnCount - 1 : temporalColumnCount;
+    let columnCount = Math.max(totalSpaceBetween < minimumGapBetweenSelfies * (temporalColumnCount - 1) ? temporalColumnCount - 1 : temporalColumnCount, 2)
 
-    const cardWidth = Math.floor(windowWidth / columnCount - minimumGapBetweenSelfies * (columnCount - 1));
+    let cardWidth = Math.floor((windowWidth - minimumGapBetweenSelfies * (columnCount - 1)) / columnCount);
 
     return {
         columnCount,

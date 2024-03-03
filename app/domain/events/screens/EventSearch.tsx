@@ -14,6 +14,7 @@ import { Dimensions } from 'react-native'
 import BackgroundView from 'root/domain/system/components/others/BackgroundView'
 import { AntDesign, Feather, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons'
 import useConfirmationDialog from 'root/hooks/useConfirmationDialog'
+import { StatusBar } from 'expo-status-bar'
 
 
 const { height: windowHeight } = Dimensions.get("window")
@@ -84,6 +85,7 @@ export default function EventSearchScreen() {
 
     return (
         <View f={1} position='relative'>
+            <StatusBar translucent style="light" />
             <BackgroundView imgAspectRatio={1} image={require("root/assets/images/background-event-search.jpg")}>
                 <ScrollView>
                     <View mih={windowHeight} jc={"center"} px={"$8"}>
@@ -97,7 +99,7 @@ export default function EventSearchScreen() {
                             mb={"$4"}
                             letterSpacing={2}
                             error={codeError}
-                            maxLength={6}
+                            maxLength={8}
                         />
                         <CustomButton
                             mode='light'

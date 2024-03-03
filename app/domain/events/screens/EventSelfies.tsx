@@ -19,6 +19,7 @@ import { firebaseDeleteSelfies } from 'root/domain/system/services/FirebaseStora
 import { useToast } from 'root/hooks/useToast'
 import useConfirmationDialog from 'root/hooks/useConfirmationDialog'
 import ImagesViewerModal from 'root/domain/system/components/others/ImagesViewerModal'
+import { StatusBar } from 'expo-status-bar'
 
 
 export default function EventSelfies() {
@@ -171,6 +172,7 @@ export default function EventSelfies() {
 
     return (
         <BackgroundView image={event.picture}>
+            <StatusBar translucent style="light" />
             <View f={1} pt={insets.top} px={minimumGapBetweenSelfies}>
                 <View fd={"row"} jc={"center"} mb={"$3"}>
                     <View pos={"absolute"} left={0} als={"center"}>

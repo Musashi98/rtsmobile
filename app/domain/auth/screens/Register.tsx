@@ -14,6 +14,7 @@ import CustomButton from 'root/domain/system/components/inputs/CustomButton'
 import { EventSearchScreenRoute } from 'root/domain/system/routing/Routes'
 import Title from 'root/domain/system/components/text/Title'
 import { Dimensions } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
 
 
 const { height: windowHeight } = Dimensions.get("window")
@@ -108,7 +109,8 @@ export default function RegisterScreen() {
     }
 
     return (
-        <View f={1} >
+        <View f={1}>
+            <StatusBar translucent style="dark" />
             <ScrollView>
                 <View mih={windowHeight} jc={"center"} px="$8" gap={"$6"}>
                     <Title als={"center"} />
