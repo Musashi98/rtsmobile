@@ -22,7 +22,7 @@ const Provider = (props: ProviderProps) => {
         <View f={1}>
             {children}
             {
-                loading && <Modal visible={true} transparent>
+                loading && <Modal statusBarTranslucent visible transparent>
                     <View f={1} jc={"center"} bg={"rgba(100, 100, 100, 0.5)"}>
                         <Spinner size={"large"} color={ThemeColors.dark.primary} />
                     </View>

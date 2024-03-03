@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import BackgroundView from 'root/domain/system/components/others/BackgroundView'
 import useStore from 'root/hooks/useStore'
 import { View, Text } from 'tamagui'
@@ -11,7 +11,6 @@ import { UserSelfie } from 'root/domain/auth/types/UserSelfie'
 import { SelfieParams } from 'root/domain/system/types/SelfieParams'
 import { minimumGapBetweenSelfies } from 'root/domain/system/configurations/AppConfigParams'
 import { AppUser } from 'root/domain/auth/types/AppUser'
-import { useSelfieViewer } from 'root/hooks/useSelfieViewer'
 import { AntDesign } from '@expo/vector-icons'
 import { ThemeColors } from 'root/domain/system/utils/ThemeColors'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
@@ -19,12 +18,12 @@ import { firebaseUpdateUser } from 'root/domain/system/services/FirebaseDb'
 import { firebaseDeleteSelfies } from 'root/domain/system/services/FirebaseStorage'
 import { useToast } from 'root/hooks/useToast'
 import useConfirmationDialog from 'root/hooks/useConfirmationDialog'
+import ImagesViewerModal from 'root/domain/system/components/others/ImagesViewerModal'
 
 
 export default function EventSelfies() {
 
     const insets = useSafeAreaInsets()
-    const showSelfie = useSelfieViewer()
     const executeWithLoading = useExecuteWithLoading()
     const showToast = useToast()
     const showConfirmationDialog = useConfirmationDialog()
@@ -49,6 +48,19 @@ export default function EventSelfies() {
     const [selectingItems, setSelectingItems] = useState(false)
 
     const [itemsSelected, setItemsSelected] = useState<boolean[]>((new Array(selfies.length)).fill(false))
+
+    const [inspectingImages, setInspectingImages] = useState(false)
+
+    const inspectedImageIndex = useRef(0)
+
+    const inspectImage = (index: number) => {
+        inspectedImageIndex.current = index
+        setInspectingImages(true)
+    }
+
+    const closeImageViewer = () => {
+        setInspectingImages(false)
+    }
 
     const enterSelectingState = (index: number) => {
         setSelectingItems(true)
@@ -75,7 +87,7 @@ export default function EventSelfies() {
 
     const selfieContainerButtonPress = (index: number) => {
         if (!selectingItems) {
-            showSelfie(selfies[index].picture)
+            inspectImage(index)
         }
         else {
             toggleItemSelectionState(index)
@@ -168,6 +180,12 @@ export default function EventSelfies() {
                     numColumns={selfiesPerRow}
                 />
             </View>
+            <ImagesViewerModal
+                visible={inspectingImages}
+                onClose={closeImageViewer}
+                index={inspectedImageIndex.current}
+                imageUrls={selfies.map((selfie) => ({ url: selfie.picture }))}
+            />
         </BackgroundView>
     )
 }

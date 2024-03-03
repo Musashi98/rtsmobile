@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useStore from 'root/hooks/useStore'
 import { AppEvent } from '../types/AppEvent'
 import BackgroundView from 'root/domain/system/components/others/BackgroundView'
@@ -8,20 +8,24 @@ import CustomButton from 'root/domain/system/components/inputs/CustomButton'
 import { router } from 'expo-router'
 import { SelfieCameraScreenRoute, EventSelfiesScreenRoute, EventSearchScreenRoute } from 'root/domain/system/routing/Routes'
 import BackButton from 'root/domain/system/components/others/BackButton'
-import { Entypo, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import { Entypo, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { ThemeColors } from 'root/domain/system/utils/ThemeColors'
-import { useSelfieViewer } from 'root/hooks/useSelfieViewer'
 import { TouchableOpacity } from 'react-native'
+import ImagesViewerModal from 'root/domain/system/components/others/ImagesViewerModal'
 
 
 export default function EventHomeScreen() {
 
     const insets = useSafeAreaInsets()
 
-    const showSelfie = useSelfieViewer()
-
     const event = useStore(state => state.event) as AppEvent
     const setEvent = useStore(state => state.setEvent)
+
+    const [inspectingImage, setInspectingImage] = useState(false)
+
+    const closeImageViewer = () => [
+        setInspectingImage(false)
+    ]
 
     const mySelfiesButtonPressHandler = () => {
         router.push(EventSelfiesScreenRoute)
@@ -37,7 +41,7 @@ export default function EventHomeScreen() {
     }
 
     const watchEventPictureButtonHandler = () => {
-        showSelfie(event.picture)
+        setInspectingImage(true)
     }
 
     return (
@@ -72,6 +76,12 @@ export default function EventHomeScreen() {
                     <CustomButton mode='dark' bTheme="secondary" als={"center"} onPress={mySelfiesButtonPressHandler}>Watch selfies<MaterialCommunityIcons name="image-multiple" size={24} color="black" /></CustomButton>
                 </View>
             </View>
+            <ImagesViewerModal
+                visible={inspectingImage}
+                onClose={closeImageViewer}
+                index={0}
+                imageUrls={[{ url: event.picture }]}
+            />
         </BackgroundView>
     )
 }

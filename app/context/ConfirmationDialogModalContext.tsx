@@ -57,7 +57,7 @@ const Provider = (props: ProviderProps) => {
     return <Context.Provider value={showDialog}>
         {props.children}
         {
-            dialogState.visible && <Modal visible animationType="fade" transparent onRequestClose={closeDialog}>
+            dialogState.visible && <Modal statusBarTranslucent visible animationType="fade" transparent onRequestClose={closeDialog}>
                 <View f={1} bg={"rgba(50, 50, 50, 0.7)"} jc={"center"} ai={"center"}>
                     <View w={windowWidth * 0.8} bg={"white"} br={10} px={"$4"} py={"$3"} gap="$4">
                         <Text>

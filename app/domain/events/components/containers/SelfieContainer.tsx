@@ -1,9 +1,8 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { GestureResponderEvent, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native'
 import { UserSelfie } from 'root/domain/auth/types/UserSelfie'
 import { SelfieParams } from 'root/domain/system/types/SelfieParams'
 import { ThemeColors } from 'root/domain/system/utils/ThemeColors'
-import { useSelfieViewer } from 'root/hooks/useSelfieViewer'
 import useStore from 'root/hooks/useStore'
 import { View, Image } from 'tamagui'
 
@@ -18,8 +17,6 @@ export default function SelfieContainer(props: SelfieContainerProps) {
     const { userSelfie, onPress, onLongPress, isSelected, ...otherProps } = props
 
     const { cardWidth: containerWidth } = useStore(state => state.selfieParams) as SelfieParams
-
-    const justMadeLongPress = useRef(false)
 
     if (!props.userSelfie) {
         return <View w={containerWidth} h={containerWidth * 1.3} />
