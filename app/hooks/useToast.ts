@@ -9,7 +9,7 @@ export const useToast = () => {
 
         Toast.show(text, {
             backgroundColor: ThemeColors[mode || "light"][theme || "primary"],
-            textColor: "white",
+            textColor: "black",
             opacity: 1,
             containerStyle: {
                 borderRadius: 20,

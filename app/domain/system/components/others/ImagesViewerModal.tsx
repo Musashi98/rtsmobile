@@ -13,11 +13,13 @@ export default function ImagesViewerModal(props: ImagesViewerModalProps) {
     const { visible, imageUrls, index, onClose } = props
 
     return (
-        <Modal statusBarTranslucent visible={visible} animationType="fade" style={{ position: 'relative', }} onRequestClose={onClose}>
-            <ImageViewer style={{ height: 100 }} renderIndicator={() => { return <View /> }} index={index} imageUrls={imageUrls} />
-            <TouchableOpacity onPress={onClose} style={CloseButtonStyle} >
-                <Ionicons name="close" size={30} color="black" />
-            </TouchableOpacity>
+        <Modal statusBarTranslucent visible={visible} animationType="fade" style={{ position: 'relative' }} onRequestClose={onClose}>
+            <View f={1} bg={"black"}>
+                <ImageViewer style={{ height: 100 }} renderIndicator={() => { return <View /> }} index={index} imageUrls={imageUrls} />
+                <TouchableOpacity onPress={onClose} style={CloseButtonStyle} >
+                    <Ionicons name="close" size={30} color="black" />
+                </TouchableOpacity>
+            </View>
         </Modal>
     )
 }

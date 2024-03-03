@@ -37,7 +37,7 @@ export default function SelfieContainer(props: SelfieContainerProps) {
             onPress={containerPressHandler}
             onLongPress={containerLongPressHandler}
             style={[SelfieContainerStyle, {
-                backgroundColor: !isSelected ? "gray" : ThemeColors.dark.secondary,
+                backgroundColor: !isSelected ? "gray" : ThemeColors.light.primary,
                 width: containerWidth,
                 height: containerWidth * 1.3
             }]}

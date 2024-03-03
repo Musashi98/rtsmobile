@@ -118,7 +118,7 @@ export default function RegisterScreen() {
                             label='Name'
                             value={name}
                             onChangeText={setName}
-                            mb={"$2"}
+                            mb={"$1"}
                             placeholder="Type your name"
                             error={nameError}
                         />
@@ -127,7 +127,7 @@ export default function RegisterScreen() {
                             label='Email'
                             value={email}
                             onChangeText={setEmail}
-                            mb={"$2"}
+                            mb={"$1"}
                             placeholder="Type your email"
                             error={emailError}
                         />
@@ -144,9 +144,9 @@ export default function RegisterScreen() {
                         <CustomButton
                             disabled={email.length === 0 || password.length === 0 || emailError !== "" || passwordError !== ""}
                             onPress={registerButtonPressHandler}
-                            mb={"$3"}
+                            style={{ marginBottom: 10 }}
                         >
-                            REGISTER
+                            <Text>REGISTER</Text>
                         </CustomButton>
                         <View fd={"row"} gap={"$1.5"} als={"center"}>
                             <Text>You already have an account?</Text>

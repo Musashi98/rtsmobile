@@ -49,9 +49,8 @@ export default function EventHomeScreen() {
             <View f={1} pt={insets.top} pb={insets.bottom + 10} justifyContent="space-between">
                 <View px={"$4"} mb="$3" fd={"row"} jc={"space-between"} ai={"center"}>
                     <BackButton onPress={backButtonPressHandler} />
-                    <View ai={"center"}>
-                        <Text color={"white"} fontSize={"$8"} fontWeight={"bold"}>{event.name}</Text>
-                        <Text color={"white"}>{(new Date(event.dateNumber)).toDateString()}</Text>
+                    <View f={1} ai={"center"}>
+                        <Text numberOfLines={1} color={"white"} fontSize={"$8"} fontWeight={"bold"}>Event {event.code}</Text>
                     </View>
                     <TouchableOpacity style={{ padding: 6 }} onPress={watchEventPictureButtonHandler}>
                         <MaterialIcons name="image-search" size={26} color="white" />
@@ -61,19 +60,41 @@ export default function EventHomeScreen() {
                     <ScrollView>
                         <View px={"$4"}>
                             <View mb="$2">
-                                <Text col={ThemeColors.dark.primary} fontSize={"$6"} fontWeight={"bold"}>Location</Text>
-                                <Text col={"white"} fontSize={"$6"}>{event.location}</Text>
+                                <Text col={ThemeColors.light.primary} fontSize={"$6"} fontWeight={"bold"}>Event Name</Text>
+                                <Text px="$2" col={"white"} fontSize={"$5"}>{event.name}</Text>
+                            </View>
+                            <View mb="$2">
+                                <Text col={ThemeColors.light.primary} fontSize={"$6"} fontWeight={"bold"}>Date</Text>
+                                <Text px="$2" col={"white"} fontSize={"$5"}>{(new Date(event.dateNumber)).toDateString()}</Text>
+                            </View>
+                            <View mb="$2">
+                                <Text col={ThemeColors.light.primary} fontSize={"$6"} fontWeight={"bold"}>Location</Text>
+                                <Text px="$2" col={"white"} fontSize={"$5"}>{event.location}</Text>
                             </View>
                             <View>
-                                <Text col={ThemeColors.dark.primary} fontSize={"$6"} fontWeight={"bold"}>Description</Text>
-                                <Text col={"white"} fontSize={"$6"}>{event.description}</Text>
+                                <Text col={ThemeColors.light.primary} fontSize={"$6"} fontWeight={"bold"}>Description</Text>
+                                <Text px="$2" col={"white"} fontSize={"$5"}>{event.description}</Text>
                             </View>
                         </View>
                     </ScrollView>
                 </View>
                 <View mt={"$3"} fd={"row"} jc={"space-around"}>
-                    <CustomButton mode='dark' bTheme="secondary" als={"center"} onPress={takeASelfieButtonPressHandler}>Take a selfie<Entypo name="camera" size={20} color="black" /></CustomButton>
-                    <CustomButton mode='dark' bTheme="secondary" als={"center"} onPress={mySelfiesButtonPressHandler}>Watch selfies<MaterialCommunityIcons name="image-multiple" size={24} color="black" /></CustomButton>
+                    <CustomButton
+                        mode='light'
+                        theme="primary"
+                        onPress={takeASelfieButtonPressHandler}
+                    >
+                        <Text>Take a selfie</Text>
+                        <Entypo name="camera" size={20} color="black" />
+                    </CustomButton>
+                    <CustomButton
+                        mode='light'
+                        theme="primary"
+                        onPress={mySelfiesButtonPressHandler}
+                    >
+                        <Text>My selfies</Text>
+                        <MaterialCommunityIcons name="image-multiple" size={24} color="black" />
+                    </CustomButton>
                 </View>
             </View>
             <ImagesViewerModal

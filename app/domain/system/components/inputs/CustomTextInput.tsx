@@ -20,14 +20,14 @@ export default function CustomTextInput(props: CustomTextInputProps) {
             }
             <Input
                 id={id || label || ""}
-                focusStyle={{ borderColor: error ? ThemeColors[mode || "light"].danger : ThemeColors[mode || "light"].primary }}
-                bc={error ? ThemeColors[mode || "light"].danger : ThemeColors[mode || "light"].primary}
+                focusStyle={{ borderColor: error ? ThemeColors.light.danger : undefined }}
+                bc={error ? ThemeColors.light.danger : undefined}
                 bw={2}
-                selectionColor={error ? ThemeColors[mode || "light"].danger : ThemeColors[mode || "light"].primary}
+                selectionColor={ThemeColors.dark.secondary}
                 {...otherProps}
             />
             {
-                error !== undefined && <Text ml={"$2"} mt={"$1"} fontSize={"$2"} color={ThemeColors[mode || "light"].danger}>{error}{" "}</Text>
+                error !== undefined && <Text ml={"$2"} mt={"$1"} fontSize={"$2"} color={ThemeColors.light.danger}>{error}{" "}</Text>
             }
         </View>
     )

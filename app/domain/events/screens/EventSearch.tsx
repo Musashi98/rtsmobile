@@ -74,12 +74,12 @@ export default function EventSearchScreen() {
 
     return (
         <View f={1} position='relative'>
-            <BackgroundView imgAspectRatio={1} image={require("root/assets/images/running-background.jpg")}>
+            <BackgroundView imgAspectRatio={1} image={require("root/assets/images/background-event-search.jpg")}>
                 <ScrollView>
                     <View mih={windowHeight} jc={"center"} px={"$8"}>
                         <CustomTextInput
                             id='EventCode'
-                            label='Event code'
+                            label='Event Code'
                             mode='dark'
                             value={code}
                             onChangeText={setCode}
@@ -90,7 +90,7 @@ export default function EventSearchScreen() {
                             maxLength={6}
                         />
                         <CustomButton
-                            mode='dark'
+                            mode='light'
                             disabled={code === "" || codeError !== ""}
                             onPress={searchEventButtonPressHandler}
                         >
@@ -102,12 +102,12 @@ export default function EventSearchScreen() {
                         <View pos={"absolute"} b={"$8"} als={"center"} w={"100%"}>
                             <CustomButton
                                 mode="dark"
-                                bTheme={"secondary"}
+                                theme={"secondary"}
                                 onPress={logoutButtonPressHandler}
                             >
                                 <View fd={"row"} ai={"center"} gap={4}>
-                                    <Text>Logout</Text>
-                                    <SimpleLineIcons name="logout" size={18} color="black" />
+                                    <Text color={"white"}>Logout</Text>
+                                    <SimpleLineIcons name="logout" size={18} color="white" />
                                 </View>
                             </CustomButton>
                         </View>

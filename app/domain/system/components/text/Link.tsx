@@ -10,7 +10,7 @@ export default function Link(props: LinkProps) {
     const { children, ...otherProps } = props
 
     return (
-        <Text col={ThemeColors.light.primary} textDecorationLine={"underline"} {...otherProps}>
+        <Text col={ThemeColors.dark.primary} textDecorationLine={"underline"} {...otherProps}>
             {children}
         </Text>
     )

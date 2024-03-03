@@ -64,11 +64,11 @@ const Provider = (props: ProviderProps) => {
                             {dialogState.text}
                         </Text>
                         <View w={"100%"} fd={"row"} jc={"space-around"}>
-                            <CustomButton bTheme="primary" onPress={dialogState.onPositive}>
-                                Accept
+                            <CustomButton theme="primary" onPress={dialogState.onPositive}>
+                                <Text>Accept</Text>
                             </CustomButton>
-                            <CustomButton bTheme="secondary" onPress={dialogState.onNegative}>
-                                Cancel
+                            <CustomButton theme="secondary" onPress={dialogState.onNegative}>
+                                <Text color="white">Cancel</Text>
                             </CustomButton>
                         </View>
                     </View>

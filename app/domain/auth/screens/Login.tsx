@@ -101,7 +101,7 @@ export default function LoginScreen() {
                             label='Email'
                             value={email}
                             onChangeText={setEmail}
-                            mb={"$2"}
+                            mb={"$1"}
                             placeholder="Type your email"
                             error={emailError}
                         />
@@ -118,9 +118,9 @@ export default function LoginScreen() {
                         <CustomButton
                             disabled={email.length === 0 || password.length === 0 || emailError !== "" || passwordError !== ""}
                             onPress={loginButtonPressHandler}
-                            mb={"$3"}
+                            style={{ marginBottom: 10 }}
                         >
-                            LOGIN
+                            <Text>LOGIN</Text>
                         </CustomButton>
                         <View fd={"row"} gap={"$1.5"} als={"center"}>
                             <Text>You don't have an account?</Text>
