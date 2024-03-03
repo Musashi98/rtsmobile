@@ -15,7 +15,8 @@ type Actions = {
     setUser: (user: AppUser | null, avoidSave?: boolean) => Promise<void>,
     setEvent: (event: AppEvent | null, avoidSave?: boolean) => Promise<void>,
     setSelfieParams: (params: SelfieParams) => void,
-    pushSelfie: (selfie: UserSelfie, avoidSave?: boolean) => void
+    pushSelfie: (selfie: UserSelfie, avoidSave?: boolean) => void,
+    updateUser: (params: { [key: string]: AppUser[keyof AppUser] }, avoidSave?: boolean) => void
 }
 
 const useStore = create<State & Actions>((set) => ({
@@ -42,6 +43,17 @@ const useStore = create<State & Actions>((set) => ({
             const newUser = { ...(state.user as AppUser) }
 
             newUser.selfies.push(selfie)
+
+            if (!avoidSave) {
+                setSessionUser(newUser)
+            }
+
+            return ({ user: newUser })
+        })
+    },
+    updateUser: (params: { [key: string]: AppUser[keyof AppUser] }, avoidSave?: boolean) => {
+        set(state => {
+            const newUser = { ...(state.user as AppUser), ...params }
 
             if (!avoidSave) {
                 setSessionUser(newUser)

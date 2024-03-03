@@ -4,15 +4,19 @@ export type FirebaseError = {
     error: string;
 }
 
-export const extractFirebaseError = (errorMessage: string): FirebaseError => {
-    const errorInfo = errorMessage.substring(errorMessage.indexOf("(") + 1, errorMessage.indexOf(")"))
+export const extractFirebaseError = (module: string, errorMessage: string): FirebaseError => {
+    if (errorMessage.includes("(")) {
+        const errorInfo = errorMessage.substring(errorMessage.indexOf("(") + 1, errorMessage.indexOf(")"))
 
-    const splittedErrorInfo = errorInfo.split("/")
+        const splittedErrorInfo = errorInfo.split("/")
 
-    return {
-        module: splittedErrorInfo[0],
-        error: splittedErrorInfo[1]
+        return {
+            module,
+            error: splittedErrorInfo[1]
+        }
     }
+
+    return { module, error: errorMessage }
 }
 
 export const traduceFirebaseError = (error: string) => {

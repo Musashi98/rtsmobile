@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { firebaseDb } from "./FirebaseInstances";
 import { AppUser } from "root/domain/auth/types/AppUser";
 import UserConverter from "root/domain/auth/utils/UserConverter";
@@ -14,10 +14,16 @@ export const firebaseUpsertUser = async (user: AppUser | DbUser): Promise<Fireba
         await setDoc(doc(firebaseDb, "users", user.id), dbUser)
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
+        return extractFirebaseError("Firebase Firestore", e.message)
+    }
+}
 
-        return e.message
+export const firebaseUpdateUser = async (userId: string, query: any) => {
+    try {
+        await updateDoc(doc(firebaseDb, "users", userId), query)
+    }
+    catch (e: any) {
+        return extractFirebaseError("Firebase Firestore", e.message)
     }
 }
 
@@ -42,10 +48,7 @@ export const firebaseGetUser = async (id: string): Promise<DbUser | FirebaseErro
         }
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
-
-        return e.message
+        return extractFirebaseError("Firebase Firestore", e.message)
     }
 }
 
@@ -59,10 +62,7 @@ export const firebaseUpsertEvent = async (name: string, code: string, dateNumber
         })
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
-
-        return e.message
+        return extractFirebaseError("Firebase Firestore", e.message)
     }
 }
 
@@ -90,9 +90,6 @@ export const firebaseGetEvent = async (code: string): Promise<AppEvent | Firebas
         }
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
-
-        return e.message
+        return extractFirebaseError("Firebase Firestore", e.message)
     }
 }

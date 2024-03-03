@@ -8,7 +8,7 @@ import { FlipType, ImageResult, manipulateAsync } from 'expo-image-manipulator'
 import { AntDesign } from '@expo/vector-icons'
 import useStore from 'root/hooks/useStore'
 import { AppUser } from 'root/domain/auth/types/AppUser'
-import { uploadUserSelfie } from '../services/FirebaseStorage'
+import { firebaseUploadUserSelfie } from '../services/FirebaseStorage'
 import useExecuteWithLoading from 'root/hooks/useExecuteWithLoading'
 import { AppEvent } from 'root/domain/events/types/AppEvent'
 import { useToast } from 'root/hooks/useToast'
@@ -75,7 +75,7 @@ export default function SelfieCamera() {
 
             const blob = await response.blob()
 
-            return await uploadUserSelfie(user.id, event.code, blob, generateNameForResource())
+            return await firebaseUploadUserSelfie(user.id, event.code, blob, generateNameForResource())
         })
 
         if ("error" in uploadResult) {

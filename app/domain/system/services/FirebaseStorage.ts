@@ -1,11 +1,11 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage"
 import { firebaseStorage } from "./FirebaseInstances"
 import { FirebaseError, extractFirebaseError } from "../utils/FirebaseErrors"
 import { firebaseGetUser, firebaseUpsertUser } from "./FirebaseDb"
 import { UserSelfie } from "root/domain/auth/types/UserSelfie"
 
 
-export const uploadUserSelfie = async (userId: string, eventCode: string, file: Blob, name: string): Promise<UserSelfie | FirebaseError> => {
+export const firebaseUploadUserSelfie = async (userId: string, eventCode: string, file: Blob, name: string): Promise<UserSelfie | FirebaseError> => {
     try {
         const storageRef = ref(firebaseStorage, name)
 
@@ -30,9 +30,19 @@ export const uploadUserSelfie = async (userId: string, eventCode: string, file: 
         return { event: eventCode, picture: resourceUrl, description: "" }
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
+        return extractFirebaseError("Firebase Storage", e.message)
+    }
+}
 
-        return e.message
+export const firebaseDeleteSelfies = async (selfies: string[]): Promise<FirebaseError | void> => {
+    try {
+        for (const url of selfies) {
+            const storageRef = ref(firebaseStorage, url)
+
+            await deleteObject(storageRef)
+        }
+    }
+    catch (e: any) {
+        return extractFirebaseError("Firebase Storage", e.message)
     }
 }

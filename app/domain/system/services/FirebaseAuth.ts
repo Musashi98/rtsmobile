@@ -32,10 +32,7 @@ export const firebaseRegister = async (name: string, email: string, password: st
         return registeredUser
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
-
-        return e.message
+        return extractFirebaseError("Firebase Auth", e.message)
     }
 }
 
@@ -56,9 +53,6 @@ export const firebaseLogin = async (email: string, password: string): Promise<Ap
         }
     }
     catch (e: any) {
-        if (e.message.contains("("))
-            return extractFirebaseError(e.message)
-
-        return e.message
+        return extractFirebaseError("Firebase Auth", e.message)
     }
 }
