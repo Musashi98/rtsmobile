@@ -18,6 +18,8 @@ export const ThemeColors = {
     }
 }
 
+export const modalOpacityBackground = "rgba(30, 30, 30, 0.8)"
+
 export const modifyColor = (baseColor: string, amount: number) => {
     const insideText = baseColor.substring(baseColor.indexOf("(") + 1, baseColor.indexOf(")"))
     const componentsSplitted = insideText.replace(" ", "").split(",")

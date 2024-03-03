@@ -1,8 +1,9 @@
 import { Ionicons } from '@expo/vector-icons'
 import React from 'react'
-import { Modal, TouchableOpacity, ViewStyle } from 'react-native'
+import { ActivityIndicator, Modal, TouchableOpacity, ViewStyle } from 'react-native'
 import ImageViewer, { ImageViewerPropsDefine } from 'react-native-image-zoom-viewer'
 import { View } from 'tamagui'
+import { ThemeColors } from '../../utils/ThemeColors'
 
 type ImagesViewerModalProps = ImageViewerPropsDefine & {
     visible?: boolean,
@@ -15,7 +16,7 @@ export default function ImagesViewerModal(props: ImagesViewerModalProps) {
     return (
         <Modal statusBarTranslucent visible={visible} animationType="fade" style={{ position: 'relative' }} onRequestClose={onClose}>
             <View f={1} bg={"black"}>
-                <ImageViewer style={{ height: 100 }} renderIndicator={() => { return <View /> }} index={index} imageUrls={imageUrls} />
+                <ImageViewer loadingRender={() => { return <ActivityIndicator color={ThemeColors.light.primary} size={"large"} /> }} style={{ height: 100 }} renderIndicator={() => { return <View /> }} index={index} imageUrls={imageUrls} />
                 <TouchableOpacity onPress={onClose} style={CloseButtonStyle} >
                     <Ionicons name="close" size={30} color="black" />
                 </TouchableOpacity>

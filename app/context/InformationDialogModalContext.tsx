@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Dimensions, Modal } from "react-native";
 import CustomButton from "root/domain/system/components/inputs/CustomButton";
+import { modalOpacityBackground } from "root/domain/system/utils/ThemeColors";
 import { Text, View, ViewProps } from "tamagui";
 
 
@@ -41,7 +42,7 @@ const Provider = (props: ProviderProps) => {
         {props.children}
         {
             dialogState.visible && <Modal statusBarTranslucent visible animationType="fade" transparent onRequestClose={closeDialog}>
-                <View f={1} bg={"rgba(50, 50, 50, 0.7)"} jc={"center"} ai={"center"}>
+                <View f={1} bg={modalOpacityBackground} jc={"center"} ai={"center"}>
                     <View w={windowWidth * 0.8} bg={"white"} br={10} px={"$4"} py={"$3"} gap="$4">
                         <Text>
                             {dialogState.text}

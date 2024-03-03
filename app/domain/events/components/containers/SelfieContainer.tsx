@@ -1,10 +1,11 @@
+import { Image } from 'expo-image'
 import React from 'react'
 import { GestureResponderEvent, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native'
 import { UserSelfie } from 'root/domain/auth/types/UserSelfie'
 import { SelfieParams } from 'root/domain/system/types/SelfieParams'
 import { ThemeColors } from 'root/domain/system/utils/ThemeColors'
 import useStore from 'root/hooks/useStore'
-import { View, Image } from 'tamagui'
+import { View } from 'tamagui'
 
 
 type SelfieContainerProps = {
@@ -37,7 +38,7 @@ export default function SelfieContainer(props: SelfieContainerProps) {
             onPress={containerPressHandler}
             onLongPress={containerLongPressHandler}
             style={[SelfieContainerStyle, {
-                backgroundColor: !isSelected ? "gray" : ThemeColors.light.primary,
+                backgroundColor: !isSelected ? "rgb(30, 30, 30)" : ThemeColors.light.primary,
                 width: containerWidth,
                 height: containerWidth * 1.3
             }]}
@@ -48,7 +49,7 @@ export default function SelfieContainer(props: SelfieContainerProps) {
                 w={containerWidth * (isSelected ? 0.95 : 1)}
                 h={(containerWidth * 1.3) * (isSelected ? 0.95 : 1)}
             >
-                <Image src={picture} width={"100%"} height={"100%"} br={6} />
+                <Image source={picture} style={{ width: "100%", height: "100%", borderRadius: 6 }} />
             </View>
         </TouchableOpacity>
     )
