@@ -30,4 +30,4 @@ Clone the repository and and use 'npm install' or 'yarn install' to install the 
 
 - **Selfie deletion**: Given the functionality to delete selfies by long pressing the corresponding cards in the selfies list screen. Any number of selfies can be selected for deletion.
 
-- **Image inspection**: Added a component to allow the user to inspect the selfies or the event picture. Also in the selfies list you can traverse the selfies by sweeping left or right.
+- **Image inspection**: Added a component to allow the user to inspect the selfies or the event picture. Also in the selfies list you can traverse the selfies by sweeping left or right or by touching the bottom images previews.

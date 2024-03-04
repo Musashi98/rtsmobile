@@ -10,11 +10,12 @@ export const useToast = () => {
         Toast.show(text, {
             backgroundColor: ThemeColors[mode || "light"][theme || "primary"],
             textColor: "black",
-            opacity: 1,
+            opacity: 0.8,
             containerStyle: {
-                borderRadius: 20,
+                borderRadius: 4,
                 paddingHorizontal: 30,
-                paddingVertical: 20
+                paddingVertical: 10,
+                marginBottom: 50
             },
             animation: true,
             ...otherOptions

@@ -147,7 +147,7 @@ export default function SelfieCamera() {
                 }
                 {
                     imageUri && <TouchableOpacity style={{ padding: 6 }} onPress={acceptImageButtonPressHandler}>
-                        <AntDesign name="check" size={24} color={ThemeColors.light.success} />
+                        <AntDesign name="check" size={24} color={"green"} />
                     </TouchableOpacity>
                 }
             </View>
