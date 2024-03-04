@@ -62,12 +62,22 @@ export default function EventSearchScreen() {
                 text: eventSearchResult.error,
                 theme: "danger"
             })
-        }
-        else {
-            await setEvent(eventSearchResult)
 
-            router.replace(EventHomeScreenRoute)
+            return
         }
+
+        if (!eventSearchResult.active) {
+            showToast({
+                text: "This event is inactive",
+                theme: "danger"
+            })
+
+            return
+        }
+
+        await setEvent(eventSearchResult)
+
+        router.replace(EventHomeScreenRoute)
     }
 
     const logoutUser = async () => {

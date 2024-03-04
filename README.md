@@ -6,6 +6,10 @@ RTS-MOBILE is a sample application to apply mobile development and Firebase inte
 
 Clone the repository and and use 'npm install' or 'yarn install' to install the dependencies. To run the project you can simply use the command 'npx expo start' and load the url from the Expo Go application.
 
+## Events
+
+Events should be created from an administrator app, or later an admin module could be added to this project. For now, there are 3 mock example events, whose codes are 4SP54Y01, 6JB14R02 and 8RA19B03. The first two events are active, and the third one is inactive.
+
 ## Development Process
 
 - **Understanding Requirements**: The first step was to read the requirements to plan and estimate how much time it would take to complete the project. Due to time constraints (working nights/early mornings and being in the middle of moving), I estimated that it could be finished in about a week or a little more.
