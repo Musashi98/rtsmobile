@@ -4,7 +4,7 @@ RTS-MOBILE is a sample application to apply mobile development and Firebase inte
 
 ## Usage
 
-Clone the repository and and use 'npm install' or 'yarn install' to install the dependencies. To run the project you can simply use the command 'npx expo start' and load the url from the Expo Go application.
+Clone the repository and and use 'npm install' or 'yarn install' to install the dependencies. To run the project you can simply use the command 'npx expo start' and load the url or scan the QR code from the Expo Go application, available in both Google Play Store and Apple Store.
 
 ## Events
 
